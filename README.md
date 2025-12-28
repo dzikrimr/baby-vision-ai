@@ -161,20 +161,7 @@ Contributions are highly appreciated! If you want to contribute:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 👥 Developers
 
-- [Developer Name] - Initial work
+- ### [dzikrimr](https://github.com/Dzvelocity): AI Engineer
 
-## 🙏 Acknowledgments
-
-- MediaPipe team for their excellent computer vision library
-- OpenCV community
-- All contributors who have helped develop this project
-
-## 📞 Contact
-
-If you have any questions or suggestions, please open an issue in the repository or contact via email.
