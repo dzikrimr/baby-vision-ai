@@ -200,7 +200,7 @@ class SleepDetector:
                     pacifier_detected = True
                     break
 
-        return "Empeng: Dipakai" if pacifier_detected else "Empeng: Tidak dipakai"
+        return "Empeng: Dipakai" if pacifier_detected else "Empeng: Tidak pakai"
 
     def detect_rollover(self, frame, pose_results):
         """Deteksi rollover berdasarkan posisi bahu dan pinggul."""
@@ -230,3 +230,29 @@ class SleepDetector:
         is_rollover = shoulder_y_diff > rollover_threshold or hip_y_diff > rollover_threshold
 
         return "Rollover: Ya" if is_rollover else "Rollover: Tidak"
+
+    def detect_sleep_and_mouth(self, frame):
+        """Deteksi status mata dan mulut untuk backward compatibility."""
+        results = self.detect(frame)
+        eye_status = results.get('eye_status', 'Tidak terdeteksi')
+        mouth_status = results.get('mouth_status', 'Tidak terdeteksi')
+        return f"{eye_status}\n{mouth_status}"
+
+    def draw_landmarks(self, frame, face_results, pose_results):
+        """Gambar landmarks pada frame untuk debugging."""
+        h, w, _ = frame.shape
+        
+        # Draw face landmarks
+        if face_results.multi_face_landmarks:
+            for landmarks in face_results.multi_face_landmarks:
+                for landmark in landmarks.landmark:
+                    x = int(landmark.x * w)
+                    y = int(landmark.y * h)
+                    cv2.circle(frame, (x, y), 1, (0, 255, 0), -1)
+        
+        # Draw pose landmarks
+        if pose_results.pose_landmarks:
+            for landmark in pose_results.pose_landmarks.landmark:
+                x = int(landmark.x * w)
+                y = int(landmark.y * h)
+                cv2.circle(frame, (x, y), 2, (255, 0, 0), -1)
